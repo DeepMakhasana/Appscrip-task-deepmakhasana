@@ -1,13 +1,19 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import Navbar from "@/components/Navbar";
+import Header from "@/components/header/Header";
 import Footer from "@/components/Footer";
 
 const simplonNorm = localFont({
   src: "./fonts/SimplonNorm-Regular-WebS.woff",
   variable: "--font-simplon-norm",
-  weight: "100 900",
+  weight: "100 400",
+});
+
+const simplonNormBold = localFont({
+  src: "./fonts/SimplonNorm-Bold-WebS.woff",
+  variable: "--font-simplon-norm-bold",
+  weight: "400 900",
 });
 
 export const metadata: Metadata = {
@@ -22,8 +28,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${simplonNorm.variable}`}>
-        <Navbar />
+      <body className={`${simplonNorm.variable} ${simplonNormBold.variable}`}>
+        <Header />
         {children}
         <Footer />
       </body>

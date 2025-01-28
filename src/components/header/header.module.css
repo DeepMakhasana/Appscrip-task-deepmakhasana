@@ -1,0 +1,140 @@
+#topNotificationBar {
+    background-color: var(--secondary-background);
+    color: #EB4C6B;
+    display: flex;
+    justify-content: space-evenly;
+    padding: 0.5rem 0;
+}
+
+#topNotificationBar>div {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+#topNotificationBar>div>span {
+    font-size: 0.8rem;
+}
+
+/* For screens smaller than 768px */
+@media (max-width: 768px) {
+    #topNotificationBar>div {
+        display: none;
+    }
+
+    #topNotificationBar>div:first-child {
+        display: flex;
+    }
+}
+
+/* -------------------------------------------------------------------------------------------------- */
+#medialBar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.6rem 1rem;
+}
+
+#medialBar h1 {
+    font-weight: bolder;
+    letter-spacing: 2px;
+    margin-left: 8rem;
+}
+
+#medialBar .medialBar__right {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+#medialBar .medialBar__right img {
+    cursor: pointer;
+}
+
+#medialBar .medialBar__left img:first-child {
+    display: none;
+}
+
+/* For screens smaller than 768px */
+@media (max-width: 768px) {
+    #medialBarWrapper {
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    #medialBar {
+        padding: 0.8rem;
+    }
+
+    #medialBar h1 {
+        font-size: 1.4rem;
+        margin-left: 3rem;
+    }
+
+    #medialBar .medialBar__left img:first-child {
+        display: block;
+    }
+
+    #medialBar .medialBar__left {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+    }
+
+    #medialBar .medialBar__left img,
+    #medialBar .medialBar__right img {
+        width: 20px;
+        height: 20px;
+        cursor: pointer;
+    }
+
+    #medialBar>.medialBar__right>.accountIcon,
+    #medialBar>.medialBar__right>div {
+        display: none;
+    }
+}
+
+/* --------------------------------------------------------------------------------------------------------- */
+#navbarWrapper {
+    display: flex;
+    justify-content: center;
+    border-bottom: 1.8px solid var(--border-color);
+    padding: 1rem 0;
+}
+
+#navbar {
+    display: flex;
+    gap: 2.6rem;
+}
+
+#navbar a {
+    font-weight: 600;
+    letter-spacing: 1.8px;
+}
+
+#navbar a::after {
+    display: block;
+    content: '';
+    border-bottom: solid 3px var(--secondary-background);
+    border-radius: 10px;
+    transform: scaleX(0);
+    transition: transform 250ms ease-in-out;
+}
+
+#navbar a:hover::after {
+    transform: scaleX(1)
+}
+
+#navbar a::after {
+    transform-origin: 0% 50%;
+}
+
+@media (max-width: 768px) {
+    #navbarWrapper {
+        display: none;
+    }
+
+    #navbar {
+        flex-direction: column;
+        margin: 2rem 0;
+    }
+}
