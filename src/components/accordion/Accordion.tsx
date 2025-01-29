@@ -5,20 +5,22 @@ import styles from "./accordion.module.css";
 
 interface IAccordionProps {
   title: string;
-  subTitle: string;
+  subTitle?: string;
+  defualtValue: boolean;
   children: ReactNode;
 }
 
-const Accordion = ({ title, subTitle, children }: IAccordionProps) => {
-  const [accordionToggle, setAccordionToggle] = useState(true);
+const Accordion = ({ title, subTitle, defualtValue, children }: IAccordionProps) => {
+  const [accordionToggle, setAccordionToggle] = useState(defualtValue);
+
   return (
     <div className={styles.accordionWrapper}>
-      <div className={styles.accordion__Header}>
+      <div className={styles.accordion__Header} onClick={() => setAccordionToggle((pre) => !pre)}>
         <div className={styles.accordion__Header_left}>
           <h4>{title}</h4>
-          <span>{subTitle}</span>
+          {subTitle && <span>{subTitle}</span>}
         </div>
-        <div className={styles.accordion__Header_right} onClick={() => setAccordionToggle((pre) => !pre)}>
+        <div className={styles.accordion__Header_right}>
           {accordionToggle ? (
             <Image src={"/arrow-up.svg"} width={20} height={20} alt="open" />
           ) : (

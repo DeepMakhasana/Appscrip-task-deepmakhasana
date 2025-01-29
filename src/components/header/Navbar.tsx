@@ -2,7 +2,7 @@ import Link from "next/link";
 import React from "react";
 import styles from "./header.module.css";
 
-const Navbar = () => {
+const Navbar = ({ menuToggle }: { menuToggle: boolean }) => {
   const navbarList = [
     {
       title: "SHOP",
@@ -26,7 +26,7 @@ const Navbar = () => {
     },
   ];
   return (
-    <div id={styles.navbarWrapper}>
+    <div className={`${styles.navbarWrapper} ${menuToggle ? styles.show : styles.hide}`}>
       <ul id={styles.navbar}>
         {navbarList.map((link) => (
           <li key={link.title}>

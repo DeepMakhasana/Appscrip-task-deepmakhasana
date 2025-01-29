@@ -12,7 +12,9 @@ export default async function Home({
   const category = searchParams.category;
   const baseUrl = "https://fakestoreapi.com";
   const url = category ? `${baseUrl}/products/category/${category}` : `${baseUrl}/products`;
-  const res = await fetch(url);
+  const res = await fetch(url, {
+    cache: "no-store",
+  });
   const products: IProduct[] = await res.json();
 
   return (

@@ -94,7 +94,7 @@
 }
 
 /* --------------------------------------------------------------------------------------------------------- */
-#navbarWrapper {
+.navbarWrapper {
     display: flex;
     justify-content: center;
     border-bottom: 1.8px solid var(--border-color);
@@ -129,12 +129,21 @@
 }
 
 @media (max-width: 768px) {
-    #navbarWrapper {
+    /* #navbarWrapper {
         display: none;
-    }
+    } */
 
     #navbar {
         flex-direction: column;
         margin: 2rem 0;
+        background-color: var(--background);
+    }
+
+    .hide {
+        display: none;
+    }
+
+    .show {
+        display: flex;
     }
 }

@@ -4,7 +4,7 @@ import styles from "./filter.module.css";
 import Image from "next/image";
 import Product from "./Product";
 import { useEffect, useState } from "react";
-import Accordion from "./Accordion";
+import Accordion from "../accordion/Accordion";
 import useQuery from "@/hook/useQuery";
 import { useRouter } from "next/navigation";
 
@@ -12,9 +12,20 @@ const ProductFilter = ({ products }: { products: IProduct[] }) => {
   const [toggleSlideBar, setToggleSlideBar] = useState(true);
   const [toggleMobileFilterOption, setToggleMobileFilterOption] = useState(false);
   const [toggleTopRightDropDown, setToggleTopRightDropDown] = useState(false);
+  const [windowWidth, setWindowWidth] = useState(0);
 
-  const windowWidth = window.innerWidth;
-  console.log("product-filter", products);
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setWindowWidth(window.innerWidth);
+
+      // Optional: Update width on resize
+      const handleResize = () => setWindowWidth(window.innerWidth);
+      window.addEventListener("resize", handleResize);
+
+      return () => window.removeEventListener("resize", handleResize);
+    }
+  }, []);
+
   return (
     <section className="container">
       <div className={styles.productFilterWrapper}>
@@ -101,20 +112,23 @@ const FilterByCategory = () => {
     }
   }, [selectedCategory, router]);
 
-  if (isLoading) {
-    return <p>Loading...</p>;
-  }
-
   if (error) {
     return <p>{error}</p>;
   }
 
   return (
-    <Accordion title="CATEGORY" subTitle="All">
+    <Accordion title="CATEGORY" subTitle="All" defualtValue={true}>
       <form className={styles.categories}>
-        <span className={styles.categories__unselect} onClick={() => router.push("/")}>
+        <span
+          className={styles.categories__unselect}
+          onClick={() => {
+            setSelectedCategory("");
+            router.push("/");
+          }}
+        >
           Unselect all
         </span>
+        {isLoading && <p>Loading...</p>}
         {data?.map((category) => (
           <div key={category} className="flex-center">
             <input
@@ -122,7 +136,7 @@ const FilterByCategory = () => {
               id={category}
               name="category"
               onChange={(e) => setSelectedCategory(e.target.id)}
-              value={selectedCategory}
+              value={category}
             />
             <label htmlFor={category}>{category}</label>
           </div>

@@ -1,13 +1,19 @@
 import Image from "next/image";
-import React from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import styles from "./header.module.css";
 
-const MedialBar = () => {
+const MedialBar = ({ setMenuToggle }: { setMenuToggle: Dispatch<SetStateAction<boolean>> }) => {
   return (
     <div id={styles.medialBarWrapper}>
       <div id={styles.medialBar} className="container">
         <div className={styles.medialBar__left}>
-          <Image src={"/hamburger-menu.svg"} width={36} height={36} alt="menu" />
+          <Image
+            src={"/hamburger-menu.svg"}
+            width={36}
+            height={36}
+            alt="menu"
+            onClick={() => setMenuToggle((pre) => !pre)}
+          />
           <Image src={"/Logo.svg"} width={36} height={36} alt="logo" />
         </div>
         <div>
