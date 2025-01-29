@@ -3,7 +3,7 @@ import { IProduct } from "@/types/product";
 import styles from "./filter.module.css";
 import Image from "next/image";
 import Product from "./Product";
-import { useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import Accordion from "../accordion/Accordion";
 import useQuery from "@/hook/useQuery";
 import { useRouter } from "next/navigation";
@@ -88,7 +88,7 @@ const ProductFilter = ({ products }: { products: IProduct[] }) => {
               !toggleMobileFilterOption && windowWidth < 768 && styles.hide
             }`}
           >
-            <FilterByCategory />
+            <FilterByCategory setToggleMobileFilterOption={setToggleMobileFilterOption} />
           </div>
           <div className={styles[toggleSlideBar ? "productsWrapper_with_filter" : "productsWrapper_without_filter"]}>
             {products.map((product: IProduct) => (
@@ -101,7 +101,11 @@ const ProductFilter = ({ products }: { products: IProduct[] }) => {
   );
 };
 
-const FilterByCategory = () => {
+const FilterByCategory = ({
+  setToggleMobileFilterOption,
+}: {
+  setToggleMobileFilterOption: Dispatch<SetStateAction<boolean>>;
+}) => {
   const { data, isLoading, error } = useQuery<string[]>({ url: "https://fakestoreapi.com/products/categories" });
   const [selectedCategory, setSelectedCategory] = useState<string>("");
   const router = useRouter();
@@ -135,7 +139,10 @@ const FilterByCategory = () => {
               type="radio"
               id={category}
               name="category"
-              onChange={(e) => setSelectedCategory(e.target.id)}
+              onChange={(e) => {
+                setToggleMobileFilterOption(false);
+                setSelectedCategory(e.target.id);
+              }}
               value={category}
             />
             <label htmlFor={category}>{category}</label>

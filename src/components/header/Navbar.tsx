@@ -1,8 +1,14 @@
 import Link from "next/link";
-import React from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import styles from "./header.module.css";
 
-const Navbar = ({ menuToggle }: { menuToggle: boolean }) => {
+const Navbar = ({
+  menuToggle,
+  setMenuToggle,
+}: {
+  menuToggle: boolean;
+  setMenuToggle: Dispatch<SetStateAction<boolean>>;
+}) => {
   const navbarList = [
     {
       title: "SHOP",
@@ -30,7 +36,9 @@ const Navbar = ({ menuToggle }: { menuToggle: boolean }) => {
       <ul id={styles.navbar}>
         {navbarList.map((link) => (
           <li key={link.title}>
-            <Link href={link.path}>{link.title}</Link>
+            <Link href={link.path} onClick={() => setMenuToggle(false)}>
+              {link.title}
+            </Link>
           </li>
         ))}
       </ul>

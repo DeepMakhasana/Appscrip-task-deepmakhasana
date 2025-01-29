@@ -10,7 +10,7 @@ const Header = () => {
     <header>
       <TopNotificationBar />
       <MedialBar setMenuToggle={setMenuToggle} />
-      <Navbar menuToggle={menuToggle} />
+      <Navbar menuToggle={menuToggle} setMenuToggle={setMenuToggle} />
     </header>
   );
 };
